@@ -1,7 +1,7 @@
 # Bookstore Application
 
 ## Description
-The Bookstore Application is a web-based platform where users can browse, search for, and order books online. Users can create accounts, log in , and manage their orders. The application is built with a React frontend for the user interface and a Spring Boot backend to handle data processing and server-side logic.
+The Bookstore Application is a web-based platform where users can browse and order books online. Users can create accounts, log in , and manage their orders. The application is built with a React frontend for the user interface and a Spring Boot backend to handle data processing and server-side logic.
 
 ## Features
 - **User Authentication**: Users can create accounts and  log in to can access and order in  the bookstore .
