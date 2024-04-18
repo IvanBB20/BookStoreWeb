@@ -2,6 +2,7 @@ package com.projectStore.bookstorebackend.service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.projectStore.bookstorebackend.entities.WebUser;
 import com.projectStore.bookstorebackend.roles.Role;
 import jakarta.annotation.PostConstruct;
@@ -40,15 +41,18 @@ public class JwtService {
                 .sign(algorithm);
     }
     public String getUsername(String token){
-       return JWT.decode(token).getClaim(USERNAME_KEY).asString();
+        DecodedJWT jwt = JWT.require(algorithm).build().verify(token);
+        return jwt.getClaim(USERNAME_KEY).asString();
     }
 
     public List<Role> getRole(String token){
-        return JWT.decode(token).getClaim(ROLE_KEY).asList(Role.class);
+        DecodedJWT jwt = JWT.require(algorithm).build().verify(token);
+        return jwt.getClaim(ROLE_KEY).asList(Role.class);
     }
 
     public boolean isExpired(String token){
-        return JWT.decode(token).getExpiresAt().before(new Date());
+        DecodedJWT jwt = JWT.require(algorithm).build().verify(token);
+        return jwt.getExpiresAt().before(new Date());
     }
 
 }

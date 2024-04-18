@@ -41,7 +41,6 @@ public class WebSecurityConfig {
 
     @Autowired
     public void configure(AuthenticationManagerBuilder builder) throws Exception {
-        System.out.println("Hey??");
         builder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
         builder.eraseCredentials(false);
     }
@@ -49,8 +48,7 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
-        httpSecurity.authorizeHttpRequests((request) -> request.requestMatchers("/auth/register", "/auth/login", "/books", "/auth/me").permitAll()//.anyRequest().authenticated()
-                // .requestMatchers("/books").hasAuthority("ADMIN")
+        httpSecurity.authorizeHttpRequests((request) -> request.requestMatchers("/auth/register", "/auth/login", "/books", "/auth/me").permitAll()
                 .anyRequest().authenticated());
 
 
