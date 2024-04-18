@@ -61,7 +61,6 @@ public class AuthenticationController {
     public ResponseEntity<LoginResponse> loginUser(@Valid @RequestBody  LoginBody loginBody){
         try {
             String jwt = webUserService.logInUser(loginBody);
-            //System.out.println(jwt);
             if (jwt == null) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
             }
@@ -74,8 +73,6 @@ public class AuthenticationController {
                     .authenticate(new UsernamePasswordAuthenticationToken(loginBody.getUsername(), loginBody.getPassword(),curRoles.stream().map(curRole -> new SimpleGrantedAuthority(curRole.name())).collect(Collectors.toList())));
             SecurityContextHolder.getContext().setAuthentication(curAuthentication);
             LoginResponse loginResponse = new LoginResponse();
-
-            System.out.println("In login function: " + SecurityContextHolder.getContext());
             loginResponse.setJwt(jwt);
             return ResponseEntity.ok(loginResponse);
         }catch (AuthenticationException e){
